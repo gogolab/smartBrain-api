@@ -38,6 +38,8 @@ app.post("/register", (req, res) =>
 
 app.put("/image", (req, res) => image.handleImage(req, res, db));
 
+app.post("/image_url", image.handleApiCall);
+
 app.listen(3000, () => {
     console.log("app is running, everything is fine...");
 });
