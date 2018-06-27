@@ -1,15 +1,15 @@
 const Clarifai = require("clarifai");
 
 const app = new Clarifai.App({
-    apiKey: "eef309dc9d664086b7455f4a101ab9a1"
+    apiKey: process.env.CLARIFAI_API_KEY
 });
 
 const handleApiCall = (req, res) => {
     app.models
         .predict("a403429f2ddf4b49b307e318f00e528b", req.body.input)
         .then(data => res.send(data))
-        .catch(err => res.status(400).json("Unable to call API"))
-}
+        .catch(err => res.status(400).json("Unable to call API"));
+};
 
 const handleImage = (req, res, db) => {
     const { id } = req.body;
