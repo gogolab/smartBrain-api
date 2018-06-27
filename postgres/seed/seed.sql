@@ -1,0 +1,2 @@
+insert into users (name, email, entries, joined) values ('test', 'test@test.com', 3, '2018-01-01');
+insert into login (hash, email) values ('$2a$10$4uUaeI8A0JRDVZOWp7pjleERsf9Nd0ZsVhSN0oNPDGAIgIa1Xmx26', 'test@test.com');
