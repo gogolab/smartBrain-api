@@ -35,6 +35,10 @@ app.get("/profile/:id", (req, res) => {
     profile.handleProfileGet(req, res, db);
 });
 
+app.post("/profile/:id", (req, res) => {
+    profile.handleProfileUpdate(req, res, db);
+});
+
 app.post("/signin", (req, res) => {
     signin.handleSignin(req, res, db, bcrypt);
 });
