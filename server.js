@@ -40,7 +40,7 @@ app.post("/profile/:id", (req, res) => {
 });
 
 app.post("/signin", (req, res) => {
-    signin.handleSignin(req, res, db, bcrypt);
+    signin.signinAuthentication(db, bcrypt);
 });
 
 app.post("/register", (req, res) =>
