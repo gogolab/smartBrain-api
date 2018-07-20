@@ -39,9 +39,8 @@ app.post("/profile/:id", (req, res) => {
     profile.handleProfileUpdate(req, res, db);
 });
 
-app.post("/signin", (req, res) => {
-    signin.signinAuthentication(db, bcrypt);
-});
+// same functionality as other handlers but using higher order function
+app.post("/signin", signin.signinAuthentication(db, bcrypt));
 
 app.post("/register", (req, res) =>
     register.handleRegister(req, res, db, bcrypt)
