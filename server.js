@@ -9,6 +9,7 @@ const image = require("./controllers/image");
 const register = require("./controllers/register");
 const signin = require("./controllers/signin");
 const profile = require("./controllers/profile");
+const auth = require("./controllers/authorization");
 
 const db = knex({
     client: "pg",
@@ -31,11 +32,11 @@ app.get("/test", (req, res) => {
     res.send("damn, it is working...");
 });
 
-app.get("/profile/:id", (req, res) => {
+app.get("/profile/:id", auth.requireAuth, (req, res) => {
     profile.handleProfileGet(req, res, db);
 });
 
-app.post("/profile/:id", (req, res) => {
+app.post("/profile/:id", auth.requireAuth, (req, res) => {
     profile.handleProfileUpdate(req, res, db);
 });
 
@@ -46,9 +47,11 @@ app.post("/register", (req, res) =>
     register.handleRegister(req, res, db, bcrypt)
 );
 
-app.put("/image", (req, res) => image.handleImage(req, res, db));
+app.put("/image", auth.requireAuth, (req, res) =>
+    image.handleImage(req, res, db)
+);
 
-app.post("/image_url", image.handleApiCall);
+app.post("/image_url", auth.requireAuth, image.handleApiCall);
 
 app.listen(3000, () => {
     console.log("app is running, everything is fine...");
