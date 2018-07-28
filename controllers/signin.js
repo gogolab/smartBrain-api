@@ -50,11 +50,23 @@ const createSessions = user => {
         .catch(console.log);
 };
 
+const getAuthTokenId = (req, res) => {
+    const { authorization } = req.headers;
+
+    return redisClient.get(authorization, (err, reply) => {
+        if (err || !reply) {
+            return res.status(400).json("unauthorized");
+        }
+
+        return res.json({ id: reply });
+    });
+};
+
 const signinAuthentication = (db, bcrypt) => (req, res) => {
     const { authorization } = req.headers;
 
     return authorization
-        ? getAuthTokenId()
+        ? getAuthTokenId(req, res)
         : handleSignin(req, res, db, bcrypt)
               .then(data => {
                   return data.id && data.email
