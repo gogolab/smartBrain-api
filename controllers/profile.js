@@ -23,7 +23,7 @@ const handleProfileUpdate = (req, res, db) => {
 
     db("users")
         .where({ id })
-        .update({ name })
+        .update({ name, age, pet })
         .then(response => {
             if (response) {
                 res.json("success, dude...");
